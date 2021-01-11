@@ -59,3 +59,17 @@ def update(id):
       cur.execute(sql, id)
       result = cur.fetchone()
       return render_template('update.html', result=result)
+
+@app.route('/adduser', methods=['POST', 'GET'])
+def adduser():
+   if request.method =='POST':
+      firstname=request.form['firstname']
+      lastname=request.form['lastname']
+      email=request.form['email']
+      cur = db.cursor()
+      sql = "INSERT INTO users(firstname, lastname, email) VALUES (%s, %s, %s)"
+      cur.execute(sql, (firstname, lastname, email))
+      cur.close()
+      return redirect(url_for('index'))
+   else:
+      return render_template('adduser.html')
