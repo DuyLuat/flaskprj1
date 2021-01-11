@@ -40,3 +40,22 @@ def one():
    result = cur.fetchone()
    cur.close()
    return render_template('one.html', result=result)
+
+@app.route('/update/<int:id>', methods=['POST', 'GET'])
+def update(id):
+   if request.method =='POST':
+      firstname=request.form['firstname']
+      lastname=request.form['lastname']
+      email=request.form['email']
+      cur = db.cursor()
+      sql = 'update users set firstname=%s, lastname=%s, email=%s where id=%s'
+      cur.execute(sql, (firstname, lastname, email, id))
+      db.commit()
+      cur.close()
+      return redirect(url_for('index'))
+   else:
+      cur = db.cursor()
+      sql = "SELECT * FROM users where id=%s"
+      cur.execute(sql, id)
+      result = cur.fetchone()
+      return render_template('update.html', result=result)

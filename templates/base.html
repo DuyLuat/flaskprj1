@@ -48,7 +48,7 @@
             const btnArray = Array.from(btnDelete);
             btnArray.forEach((btn) => {
                 btn.addEventListener('click', (e) => {
-                if(!confirm('Are you sure you want to delete it?')){
+                if(!confirm('Bạn có thực sự muốn xóa ?')){
                     e.preventDefault();
                 }
                 });
@@ -57,7 +57,7 @@
 
 
     $(document).ready( function () {
-            $('#myTable1').DataTable();
+            $('#myTableData').DataTable();
         } );
     </script>
 
