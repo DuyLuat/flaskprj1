@@ -1,14 +1,12 @@
 from flask import Flask, escape, request, render_template, redirect, url_for, flash
 import pymysql
 
-
 db = pymysql.connect(host='localhost',
                            user='root',
                            password='',
                            database='test',
                            charset='utf8mb4',
                            cursorclass=pymysql.cursors.DictCursor)
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -19,7 +17,6 @@ def index():
    results = cur.fetchall()
    cur.close()
    return render_template('index.html', results=results)
-
 
 
 @app.route('/delete/<int:id>')
